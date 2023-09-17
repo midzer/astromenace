@@ -142,7 +142,7 @@ struct sGameConfig {
     int DisplayIndex{0};
     int Width{1280};        // view size width
     int Height{768};        // view size height
-    bool Fullscreen{true};  // fullscreen mode (if false - windowed mode)
+    bool Fullscreen{false};  // fullscreen mode (if false - windowed mode)
 
     // FIXME should be removed, vw_GetInternalResolution() should be used instead in code
     //       also, all directly usage of 1228/1024/768 should be removed as well

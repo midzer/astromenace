@@ -41,6 +41,8 @@
 // NOTE GL_MAX_TEXTURE_MAX_ANISOTROPY (since OpenGL 4.6)
 //      could be used to replace GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT
 
+#include <gl4esinit.h>
+
 #include <algorithm>
 #include "graphics_internal.h"
 #include "graphics.h"
@@ -156,6 +158,8 @@ bool vw_CreateOpenGLContext(int VSync)
 
     GLContext = SDL_GL_CreateContext(SDLWindow);
 
+    initialize_gl4es();
+
     if (!GLContext) {
         std::cerr << __func__ << "(): " << "SDL_GL_CreateContext() failed: " << SDL_GetError() << "\n";
         std::cerr << __func__ << "(): " << "Can't create OpenGL context.\n";
@@ -174,8 +178,8 @@ bool vw_CreateOpenGLContext(int VSync)
     DevCaps.MaxAnisotropyLevel = 0;
     DevCaps.FramebufferObjectDepthSize = 0;
 
-    DevCaps.OpenGL_1_3_supported = Initialize_OpenGL_1_3();
-    DevCaps.OpenGL_1_5_supported = Initialize_OpenGL_1_5();
+    DevCaps.OpenGL_1_3_supported = true;//Initialize_OpenGL_1_3();
+    DevCaps.OpenGL_1_5_supported = true;//Initialize_OpenGL_1_5();
     DevCaps.OpenGL_2_0_supported = Initialize_OpenGL_2_0();
     DevCaps.OpenGL_2_1_supported = Initialize_OpenGL_2_1();
     DevCaps.OpenGL_3_0_supported = Initialize_OpenGL_3_0();
@@ -277,10 +281,10 @@ void vw_InitOpenGLStuff(int Width, int Height, int *MSAA, int *CSAA)
     glClearDepth(1.0);
     glClearStencil(0);
     glDepthFunc(GL_LEQUAL);
-    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+    /*glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
     glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
     glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
-    glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
+    glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);*/
 
     if (DevCaps.OpenGL_3_0_supported) {
         MainFBO = vw_BuildFBO(Width, Height, true, true, *MSAA, CSAA);

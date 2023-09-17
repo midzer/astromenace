@@ -448,7 +448,7 @@ int main(int argc, char *argv[])
     }
 
     // should be called after vw_InitText(), since we need find language index numbers
-    bool FirstStart = LoadXMLConfigFile(NeedResetConfig);
+    bool FirstStart = false;//LoadXMLConfigFile(NeedResetConfig);
 
     if (!VideoConfig(FirstStart)) {
         vw_ReleaseText();
@@ -483,7 +483,7 @@ RecreateWindow:
     if (!vw_CreateWindow("AstroMenace", GameConfig().Width, GameConfig().Height,
                          GameConfig().Fullscreen, GameConfig().DisplayIndex)
         || !vw_CreateOpenGLContext(GameConfig().VSync)
-        || !CheckOpenGLCapabilities(FirstStart)) {
+        /*|| !CheckOpenGLCapabilities(FirstStart)*/) {
         vw_DeleteOpenGLContext();
         vw_DestroyWindow();
         vw_ShutdownFont();

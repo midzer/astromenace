@@ -138,9 +138,9 @@ GLtexture vw_BuildTexture(const std::unique_ptr<uint8_t[]> &PixelsArray,
  */
 void vw_SelectActiveTextureUnit(GLenum Unit)
 {
-    if (pfn_glActiveTexture) {
-        pfn_glActiveTexture(GL_TEXTURE0 + Unit);
-    }
+    //if (pfn_glActiveTexture) {
+        glActiveTexture(GL_TEXTURE0 + Unit);
+    //}
 }
 
 /*
